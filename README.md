@@ -1,6 +1,6 @@
 # WordPress Platform as Code
 
-## What it is
+## What it is?
 
 ## Architecture
 
