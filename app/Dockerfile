@@ -9,10 +9,12 @@ RUN composer dump-autoload --optimize
 # Stage 2: runtime image
 FROM php:8.3-fpm-alpine AS runtime
 
+
 # hadolint ignore=DL3018,SC2086
 RUN apk add --no-cache icu-dev libzip-dev fcgi \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-install pdo pdo_mysql opcache intl zip \
+    && docker-php-ext-install mysqli pdo_mysql intl zip \
     && apk del .build-deps
 
 # Create non-root user
