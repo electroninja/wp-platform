@@ -90,6 +90,12 @@ if (!defined('WP_DEVELOPMENT_MODE')) {
 }
 
 /**
+ * Redis Object Cache Configuration
+ */
+Config::define('WP_REDIS_HOST', env('WP_REDIS_HOST') ?: 'redis');
+Config::define('WP_REDIS_PORT', env('WP_REDIS_PORT') ?: 6379);
+
+/**
  * URLs
  */
 Config::define('WP_HOME', env('WP_HOME'));
