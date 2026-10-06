@@ -21,9 +21,11 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    env_file: ../.env
+    env_file:
+      - ../.env
     volumes:
       - ../app/bedrock:/var/www/html
+      - ../app/bootstrap.sh:/var/www/html/bootstrap.sh
       - wp_uploads:/var/www/html/web/app/uploads
     networks: [wp_net]
 
