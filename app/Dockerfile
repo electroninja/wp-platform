@@ -11,11 +11,16 @@ FROM php:8.3-fpm-alpine AS runtime
 
 
 # hadolint ignore=DL3018,SC2086
-RUN apk add --no-cache icu-dev libzip-dev fcgi \
+RUN apk add --no-cache icu-dev libzip-dev fcgi bash mysql-client \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-install pdo pdo_mysql opcache intl zip \
     && docker-php-ext-install mysqli pdo_mysql intl zip \
     && apk del .build-deps
+
+# Install WP-CLI
+# Install WP-CLI
+RUN curl -sSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp \
+    && chmod +x /usr/local/bin/wp
 
 # Create non-root user
 RUN addgroup -g 1000 app && adduser -D -u 1000 -G app app
